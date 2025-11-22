@@ -47,10 +47,7 @@ app.get("/", (req, res) => {
   res.json({ ok: true, message: "Artify Backend Running" });
 });
 
-// ==========================================================
-// ===============   GET ALL ARTWORK ITEMS   =================
-// Single consolidated route (supports userEmail, visibility, category, sort, limit)
-// ==========================================================
+//    GET ALL ARTWORK ITEMS
 app.get("/items", async (req, res) => {
   if (!itemsCollection) {
     console.error("GET /items: itemsCollection not initialized");
