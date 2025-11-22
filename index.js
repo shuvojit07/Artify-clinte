@@ -173,7 +173,6 @@ app.delete("/favorites/:id", async (req, res) => {
     }
     const col = db.collection("favorites");
 
-    // Strategy 1: if raw looks like ObjectId, try that first
     if (ObjectId.isValid(raw)) {
       try {
         const r = await col.findOneAndDelete({ _id: new ObjectId(raw) });
@@ -186,7 +185,7 @@ app.delete("/favorites/:id", async (req, res) => {
         }
       } catch (err) {
         console.warn("delete favorites by ObjectId error", err);
-        // continue to other strategies
+      
       }
     }
 
