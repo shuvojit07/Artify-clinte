@@ -19,10 +19,6 @@ app.use(express.json());
 let mongoClient = null;
 let itemsCollection = null;
 
-/**
- * Convert a Mongo document to API item object.
- * Ensure _id is a string.
- */
 function docToItem(doc) {
   if (!doc) return null;
   // spread first, then override _id with string
