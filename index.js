@@ -21,7 +21,6 @@ let itemsCollection = null;
 
 function docToItem(doc) {
   if (!doc) return null;
-  // spread first, then override _id with string
   return { ...doc, _id: String(doc._id) };
 }
 
