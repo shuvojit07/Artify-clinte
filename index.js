@@ -225,9 +225,8 @@ app.delete("/favorites/:id", async (req, res) => {
   }
 });
 
-// ==========================================================
-// ================   GET SINGLE ARTWORK   ===================
-// ==========================================================
+//    GET SINGLE ARTWORK  
+
 app.get("/items/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -236,12 +235,10 @@ app.get("/items/:id", async (req, res) => {
     return res.status(500).json({ success: false, message: "Server error" });
   }
 
-  // if id looks like ObjectId, use that, otherwise try string-based _id
   try {
     if (ObjectId.isValid(id)) {
       const doc = await itemsCollection.findOne({ _id: new ObjectId(id) });
       if (doc) return res.json({ success: true, data: docToItem(doc) });
-      // fallthrough to try string _id
     }
 
     const doc2 = await itemsCollection.findOne({ _id: id });
@@ -254,9 +251,9 @@ app.get("/items/:id", async (req, res) => {
   }
 });
 
-// ==========================================================
-// ====================   ADD ARTWORK   =====================
-// ==========================================================
+
+//   ADD ARTWORK  
+
 app.post("/items", async (req, res) => {
   if (!itemsCollection) {
     console.error("POST /items: itemsCollection not initialized");
