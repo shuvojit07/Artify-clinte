@@ -363,7 +363,7 @@ app.delete("/items/:id", async (req, res) => {
   }
 
   try {
-    // try ObjectId deletion if valid
+  
     if (ObjectId.isValid(id)) {
       try {
         const r = await itemsCollection.findOneAndDelete({
@@ -373,16 +373,16 @@ app.delete("/items/:id", async (req, res) => {
           console.log("DELETE: removed by ObjectId:", id);
           return res.json({ success: true, message: "Artwork Deleted" });
         }
-        // not found by ObjectId -> fallthrough
+        
       } catch (innerErr) {
         console.error("DELETE: error deleting by ObjectId:", innerErr);
-        // fallthrough to try string _id
+ 
       }
     } else {
       console.log("DELETE: provided id is not a valid ObjectId:", id);
     }
 
-    // fallback: try delete by string _id
+    
     try {
       const r2 = await itemsCollection.findOneAndDelete({ _id: id });
       if (r2.value) {
@@ -401,7 +401,7 @@ app.delete("/items/:id", async (req, res) => {
   }
 });
 
-// START SERVER
+
 const start = async () => {
   try {
     await connectMongo();
