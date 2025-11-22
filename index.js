@@ -6,7 +6,7 @@ import { MongoClient, ObjectId } from "mongodb";
 // Server Port
 const PORT = 4000;
 
-// Your MongoDB connection string
+// Your MongoDB connection string 
 const MONGO_URI =
   "mongodb+srv://Artify-server:W2ny2Zw42LPwUSFX@cluster0.s0he4h7.mongodb.net/mydb?retryWrites=true&w=majority";
 
