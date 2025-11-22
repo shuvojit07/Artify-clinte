@@ -97,7 +97,6 @@ app.get("/favorites", async (req, res) => {
     const q = {};
     if (req.query.userEmail) q.userEmail = req.query.userEmail;
     const docs = await col.find(q).toArray();
-    // normalize _id to string
     return res.json({
       success: true,
       data: docs.map((d) => ({ ...d, _id: String(d._id) })),
@@ -117,7 +116,6 @@ app.post("/favorites", async (req, res) => {
         .json({ success: false, message: "itemId and userEmail required" });
     }
 
-    // Normalize itemId to string
     itemId = String(itemId).trim();
 
     const db =
@@ -130,11 +128,8 @@ app.post("/favorites", async (req, res) => {
       return res.status(500).json({ success: false, message: "Server error" });
     }
     const col = db.collection("favorites");
-
-    // Use normalized string comparison to prevent duplicates
     const exists = await col.findOne({ itemId: itemId, userEmail: userEmail });
     if (exists) {
-      // return normalized existing doc
       return res
         .status(409)
         .json({
