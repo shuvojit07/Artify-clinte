@@ -320,7 +320,6 @@ app.put("/items/:id", async (req, res) => {
   }
 
   try {
-    // try ObjectId update first (if possible)
     if (ObjectId.isValid(id)) {
       const update = { $set: req.body };
       const r = await itemsCollection.findOneAndUpdate(
@@ -331,12 +330,11 @@ app.put("/items/:id", async (req, res) => {
       if (r.value) {
         return res.json({ success: true, data: docToItem(r.value) });
       }
-      // else fallthrough to try string _id
+      
     } else {
       console.log("PUT: id not valid ObjectId, will try string _id:", id);
     }
 
-    // fallback: try update by string _id
     const update2 = { $set: req.body };
     const r2 = await itemsCollection.findOneAndUpdate({ _id: id }, update2, {
       returnDocument: "after",
@@ -352,10 +350,9 @@ app.put("/items/:id", async (req, res) => {
   }
 });
 
-// ==========================================================
-// =================   DELETE ARTWORK   ======================
-// Robust delete: try ObjectId, then string _id; log full errors
-// ==========================================================
+
+//  DELETE ARTWORK  
+
 app.delete("/items/:id", async (req, res) => {
   const id = req.params.id;
   console.log("DELETE /items/:id called with id:", id);
