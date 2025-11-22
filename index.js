@@ -81,13 +81,7 @@ app.get("/items", async (req, res) => {
   }
 });
 
-// ==========================================================
-// ===============   FAVORITES ROUTES   =====================
-// Simple favorites: store docs in "favorites" collection
-// POST /favorites  { itemId, userEmail, imageUrl, title, createdAt }
-// GET  /favorites?userEmail=...
-// DELETE /favorites/:id
-// ==========================================================
+// FAVORITES ROUTES  
 app.get("/favorites", async (req, res) => {
   try {
     const db =
