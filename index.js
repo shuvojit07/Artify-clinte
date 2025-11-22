@@ -30,10 +30,7 @@ async function connectMongo() {
     await mongoClient.connect();
     const db = mongoClient.db("mydb");
     itemsCollection = db.collection("items");
-
-    // Make DB available to route handlers via req.app.locals.db
     app.locals.db = db;
-    // optional global fallback for other code that expects globalThis.mongoClient
     globalThis.mongoClient = mongoClient;
 
     console.log(
