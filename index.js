@@ -38,7 +38,6 @@ async function connectMongo() {
     );
   } catch (err) {
     console.error("MongoDB connection error:", err);
-    // Throw so server doesn't continue running in broken state
     throw err;
   }
 }
