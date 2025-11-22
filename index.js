@@ -298,8 +298,6 @@ app.post("/items", async (req, res) => {
     };
 
     const result = await itemsCollection.insertOne(artwork);
-
-    // return created doc with string _id
     const createdDoc = { ...artwork, _id: result.insertedId };
     res.status(201).json({
       success: true,
